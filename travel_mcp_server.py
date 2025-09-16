@@ -1,6 +1,6 @@
 from mcp.server.fastmcp import FastMCP
 import pandas as pd
-
+import os
 
 mcp = FastMCP("Travel")
 
@@ -192,3 +192,4 @@ def get_destination_images(destination: str) -> list:
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))  # Render provides PORT env
     mcp.run(transport="streamable-http", host="0.0.0.0", port=port)
+
