@@ -184,6 +184,11 @@ def get_destination_images(destination: str) -> list:
     """Fetch travel images for a destination using Unsplash API."""
     return search_unsplash(destination)
 
+# if __name__ == "__main__":
+#     #mcp.run(transport="stdio")
+
+#     mcp.run(transport="streamable-http")
+
 if __name__ == "__main__":
-    #mcp.run(transport="stdio")
-    mcp.run(transport="streamable-http")
+    port = int(os.environ.get("PORT", 8000))  # Render provides PORT env
+    mcp.run(transport="streamable-http", host="0.0.0.0", port=port)
