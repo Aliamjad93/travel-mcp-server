@@ -1,7 +1,8 @@
 from mcp.server.fastmcp import FastMCP
 import pandas as pd
 import os
-
+from mcp.server.stdio import stdio_server
+from mcp.server.http import http_server
 mcp = FastMCP("Travel")
 
 
@@ -190,6 +191,16 @@ def get_destination_images(destination: str) -> list:
 #     mcp.run(transport="streamable-http")
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # Render provides PORT env
-    mcp.run(transport="streamable-http", host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 8000))  # Render sets this
+    host = "0.0.0.0"
+
+    # If you want streamable-http
+    import uvicorn
+    uvicorn.run(
+        "travel_mcp_server:mcp.app",  # assuming FastMCP creates `app`
+        host=host,
+        port=port,
+        reload=False
+    )
+
 
